@@ -15,11 +15,21 @@ router.post(
   validateBody(schemas.signupSchema),
   controllerWrapper(ctrl.signup)
 );
+router.get(
+  "/users/verify/:verificationToken",
+  controllerWrapper(ctrl.verifyEmail)
+);
+router.post(
+  "/users/verify",
+  validateBody(schemas.verifyEmailSchema),
+  controllerWrapper(ctrl.resendVerifyEmail)
+);
 router.post(
   "/users/login",
   validateBody(schemas.loginSchema),
   controllerWrapper(ctrl.login)
 );
+
 router.get("/users/current", authenticate, controllerWrapper(ctrl.getCurrent));
 router.post("/users/logout", authenticate, controllerWrapper(ctrl.logout));
 router.patch(
